@@ -23,22 +23,24 @@ class List{
 	int Choice();
 	void Add(int);
 	void Print();
-	void Search(int);};
+	void Search(int);
+	void Insert(int, int);};
 
 int List::Choice(){
 	int n = 0;
 
 	
-	while( n != 1 && n != 2 && n != 3 && n != 4){
-		cout << "Choose (1) Add / (2) Print / (3) End / (4) Search : "; cin >> n; 
-		if( n != 1 && n != 2 && n != 3 && n != 4) cout << "Plz Choose Number CORRECTLY\n" << endl;}
+	while( n != 1 && n != 2 && n != 3 && n != 4 && n != 5){
+		cout << "Choose (1) Add / (2) Print / (3) End / (4) Search / (5) Insert : "; cin >> n; 
+		if( n != 1 && n != 2 && n != 3 && n != 4 && n != 5) cout << "Plz Choose Number CORRECTLY\n" << endl;}
 	return n;} 
 
 void List::Add(int a){
 	Node * Temp = new Node(a, NULL); 
 
 	if(Head == NULL){
-		Head = Temp;}
+		Head = Temp;
+		Tail = Temp;}
 
 	else if((Head != NULL) && (Head -> next == NULL)){
 		Head -> next = Temp;
@@ -54,7 +56,7 @@ void List::Add(int a){
 
 void List::Print(){
 	if(Head == NULL){
-		cout << "List is Emtpy\n" << endl;}
+		cout << "Unavailable to Print(List is Emtpy)\n" << endl;}
 
 	else{
 		int cnt = 1;
@@ -67,6 +69,32 @@ void List::Print(){
 			cout << " -> (" << cnt << ") " << ps -> data;
 			ps = ps -> next;}
 		cout << " [TAIL]\n" << endl;}}
+
+void List::Insert(int a, int i){
+
+	if(i > index){
+		cout << "Unavailable to Insert(Index Overflow)\n" << endl;}
+
+	else{
+		Node *insert = new Node(a, NULL);
+		Node *ps = Head;
+
+		if(i == 1){
+			insert -> next = Head;
+			Head = insert;}
+		
+		else {
+			for(int j = 1; j < i - 1; j++){
+				ps = ps -> next;}
+		
+			insert -> next = ps -> next;
+			ps -> next = insert;}
+
+		index++;
+
+		cout << "Number " << a << " is Inserted at " << i << " index\n" << endl;}}
+
+		
 
 
 void List::Search(int i){
@@ -108,7 +136,14 @@ int main(){
 		else if(ps == 4){
 			int index;
 			cout << "Index to Search : "; cin >> index;
-			list.Search(index);}}
+			list.Search(index);}
+
+		else if(ps == 5){
+			int index;
+			int number;
+			cout << "Number to Insert : "; cin >> number;
+			cout << "Index to Search : "; cin >> index;
+			list.Insert(number, index);}}
 
 	cout << "Linked List End" << endl;
 
