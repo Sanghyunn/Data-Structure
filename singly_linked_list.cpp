@@ -25,7 +25,8 @@ class List{
 	void Print();
 	void Search(int);
 	void Insert(int, int);
-	void Delete(int);};
+	void Delete(int);
+	~List(){while(Head != NULL){Delete(index);} cout << "Linked List End" << endl;}};
 
 int List::Choice(){
 	int n = 0;
@@ -140,10 +141,9 @@ void List::Delete(int i){
 	
 			ps -> next = Temp;}
 
-		index--;
-		cout << i << " index is Deleted\n" << endl;}}	
-						
-			
+		cout << index << " index is Deleted\n" << endl;
+	
+		index--;}}
 
 int main(){
 	List list;
@@ -177,15 +177,7 @@ int main(){
 		else if(ps == 6){
 			int index;
 			cout << "Index to Delete : "; cin >> index;
-			list.Delete(index);} }
+			list.Delete(index);}}
 
-	cout << "Linked List End" << endl;
 
 	return 0;}
-
-			
-	
-	
-		
-
-
