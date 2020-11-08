@@ -24,15 +24,16 @@ class List{
 	void Add(int);
 	void Print();
 	void Search(int);
-	void Insert(int, int);};
+	void Insert(int, int);
+	void Delete(int);};
 
 int List::Choice(){
 	int n = 0;
 
 	
-	while( n != 1 && n != 2 && n != 3 && n != 4 && n != 5){
-		cout << "Choose (1) Add / (2) Print / (3) End / (4) Search / (5) Insert : "; cin >> n; 
-		if( n != 1 && n != 2 && n != 3 && n != 4 && n != 5) cout << "Plz Choose Number CORRECTLY\n" << endl;}
+	while( n != 1 && n != 2 && n != 3 && n != 4 && n != 5 && n != 6){
+		cout << "Choose (1) Add / (2) Print / (3) End / (4) Search / (5) Insert / (6) Delete : "; cin >> n; 
+		if( n != 1 && n != 2 && n != 3 && n != 4 && n != 5 && n != 6) cout << "Plz Choose Number CORRECTLY\n" << endl;}
 	return n;} 
 
 void List::Add(int a){
@@ -113,7 +114,35 @@ void List::Search(int i){
 		cout << i << " index's data : " << ps -> data << '\n' << endl;}}	
 
 	
-			
+void List::Delete(int i){
+	if(Head == NULL){
+		cout << "Unavailable to Delete (List is Empty)\n" << endl;}
+
+	else if(i > index){
+		cout << "Unavailable to Delete (Index Overflow)\n" << endl;}
+
+	else{
+		Node *Temp;
+		Node *ps = Head;
+
+		if(i == 1){
+			Temp = Head -> next;
+			delete Head;
+
+			Head = Temp;}
+
+		else{
+			for(int j = 1; j < i - 1; j++){
+				ps = ps -> next;}
+
+			Temp = ps -> next -> next;
+			delete ps -> next;
+	
+			ps -> next = Temp;}
+
+		index--;
+		cout << i << " index is Deleted\n" << endl;}}	
+						
 			
 
 int main(){
@@ -143,7 +172,12 @@ int main(){
 			int number;
 			cout << "Number to Insert : "; cin >> number;
 			cout << "Index to Search : "; cin >> index;
-			list.Insert(number, index);}}
+			list.Insert(number, index);}
+
+		else if(ps == 6){
+			int index;
+			cout << "Index to Delete : "; cin >> index;
+			list.Delete(index);} }
 
 	cout << "Linked List End" << endl;
 
